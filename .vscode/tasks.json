@@ -1,0 +1,57 @@
+{
+    "tasks": [
+        // {
+        //     "type": "shell",
+        //     "label": "gcc",
+        //     "command": "d:\\mingw\\bin\\gcc.exe",
+        //     "args": [
+        //         "-g",
+        //         "${file}",
+        //         "-o",
+        //         "${fileDirname}\\${fileBasenameNoExtension}.exe"
+        //     ],
+        //     "options": {
+        //         "cwd": "d:\\mingw\\bin"
+        //     }
+        // },
+        {
+            "label": "Build",
+            "type": "shell",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "windows": {
+                "command": "g++",
+                "args": [
+                    "-ggdb",
+                    "\"${file}\"",
+                    "--std=c++11",
+                    "-o",
+                    "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
+                ]
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "g++",
+            "command": "d:\\mingw\\bin\\g++.exe",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "d:\\mingw\\bin"
+            }
+        }
+    ],
+    "version": "2.0.0"
+}
