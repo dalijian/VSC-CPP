@@ -1,6 +1,8 @@
 #ifndef ARRAY_INCLUDED
 #define ARRAY_INCLUDED
+// 把 T 替换成 Array_T
 #define T Array_T
+//  使用 typedef  来 创建 新的 类型名， #define 无法 正确 地 处理 指针 类型 
 typedef struct T *T;
 
 extern T Array_new(int length, int size);

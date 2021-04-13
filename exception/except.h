@@ -1,5 +1,6 @@
 #ifndef EXCEPT_INCLUDED
 #define EXCEPT_INCLUDED
+// 用来 设置 异常 信号 
 #include <setjmp.h>
 
 #define T Except_T
