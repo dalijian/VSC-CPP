@@ -11,15 +11,15 @@ struct T
 {
     int length;
     unsigned timestamp; // 用于 检查 Set_map 中 产生 的 可 检查 的 运行 时 错误
-    int (*cmp)(const void *x, const void *y);
-    unsigned (*hash)(const void *x);
+    int (*cmp)(const void *x, const void *y); // 函数 指针 
+    unsigned (*hash)(const void *x);            // 函数 指针 
     int size;
 
     struct member
     {
         struct member *link;
         const void *member;
-    } * *buckets;
+    } **buckets;
 };
 
 T Set_new(int hint, int cmp(const void *x, const void *y),
@@ -327,7 +327,7 @@ T Set_diff(T s,T t){
                 }
             }
         }
-        { T u=t;t=s;s=u}
+        { T u=t;t=s;s=u;}
         {
              int i;
             struct member *q;

@@ -54,6 +54,7 @@
 {
     "version": "0.2.0",
     "configurations": [
+
       {
         "name": "(gdb) Launch",
         "preLaunchTask": "Build",
@@ -62,7 +63,7 @@
         "targetArchitecture": "x86_64",
         "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
         "miDebuggerPath": "D:\\mingw\\bin\\gdb.exe",
-        "args": [],
+        "args": ["-a","hello","world"],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
         "environment": [],

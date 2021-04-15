@@ -3,7 +3,7 @@
 
 // List_T 是 一个 指向 List_T 结构 的 指针 。
 #define T List_T
-
+// 使用 *T 代替 struct T 
 typedef struct T *T;
 
 struct T
@@ -35,5 +35,15 @@ extern void List_free(T *list);
 extern void List_map(T list, void apply(void **x, void *cl), void *cl);
 // 返回 一个 指向 该 函数 组 第一个 元素 的 指针
 extern void **List_toArray(T list, void *end);
+// 在 一个 单链表 中 查找 一个 指定值 的 函数，
+// 参数 由 一个 指向链表 第一个 节点 的 指针 
+// 一个 指向 我们 需要 查找 的 值 的 指针 和 一个 函数 指针 ，它 所 指向 的 函数 用于 比较 存储 于 链表 中 的 类型 的 值 
+// 第二个参数 必须 是 指向值的指针，而不是值本身，然后将这个值的指针传递给比较函数，这个修改 使 字符串和数组对象也可以被使用，
+// 因为 字符串和数组无法作为参数传递给函数，但指向它们的指针却可以
+
+T * search_list(T node,void const *value,int(* compare)(void const *,void const *));
+
+
+
 #undef T
 #endif

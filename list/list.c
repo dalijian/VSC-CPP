@@ -138,3 +138,13 @@ void **List_toArray(T list, void *end)
     array[i] = end;
     return array;
 }
+
+T *search_list(T node,void const *value,int (*compare)(void const *,void const *)){
+    while(node!=NULL){
+        if(compare(node->first,value)==0){
+            break;
+        }
+        node=node->rest;
+    }
+    return node;
+}
