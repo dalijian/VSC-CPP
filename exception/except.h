@@ -2,10 +2,12 @@
 #define EXCEPT_INCLUDED
 // 用来 设置 异常 信号 
 #include <setjmp.h>
-
+// 这个指令告诉 CPP 定义 T 为 Except_T。
 #define T Except_T
+// 标识符 T  可作为类型 struct T  的缩写
 typedef struct T
 {
+    // 异常 原因 
     char *reason;
 } T;
 

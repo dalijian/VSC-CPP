@@ -16,6 +16,7 @@ extern void Stack_push(T stk,void *x);
 extern void *Stack_pop(T stk);
 extern void Stack_free(T *stk);
 
-// 取消 定义 的 宏 T
+// 取消 定义 的 宏 T 
+// 客户端 调用 程序 必须 使用 Stack_T, 因为 #undef 指令 取消了 这个 简写 
 #undef T
 #endif

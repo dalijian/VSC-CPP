@@ -3,7 +3,7 @@
 	.p2align 4,,15
 	.globl	_fun1
 	.def	_fun1;	.scl	2;	.type	32;	.endef
-_fun1:
+_fun1:4
 LFB0:
 	.cfi_startproc
 	flds	8(%esp)  # 浮点 数 传参 用 XMM 寄存器 
