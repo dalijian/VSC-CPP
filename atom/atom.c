@@ -4,6 +4,7 @@
 #include <limits.h>
 #include <stdlib.h>
 #include "mem.h"
+#include <stdio.h>
 // 数组中 元素 个数 等于 数组 的 大小 除以 每个 元素的 大小
 #define NELEMS(x) ((sizeof(x)) / (sizeof((x)[0])))
 // 散列表 显然 是 一个 针对 原子表 的 数据 结构 ，
@@ -20,7 +21,7 @@ static struct atom
     char *str;
 
 } * buckets[2048];
-// 用于 散列 操作 
+// 用于 散列 操作
 static unsigned long scatter[] = {207817053, 143302914, 1027100827};
 // 调用 Atom_new 初始化 原子 类
 const char *Atom_string(const char *str)
@@ -86,12 +87,12 @@ const char *Atom_new(const char *str, int len)
     {
         h = (h << 1) + scatter[(unsigned char)str[i]];
     }
-    // 拿到 buckets 中 元素 个数  
-    // & 位运算 都为 1 时 结果 才 为 1 
+    // 拿到 buckets 中 元素 个数
+    // & 位运算 都为 1 时 结果 才 为 1
     h &= NELEMS(buckets) - 1;
     // 使用 散列表 实现 原子 类
-    // 不用 循环 buckets 数组， 根据 str 和 散列 算法  就 直接 定位 到了 buckets 数组 下标 
-    // 接着 处理 hash 冲突 就 行了   
+    // 不用 循环 buckets 数组， 根据 str 和 散列 算法  就 直接 定位 到了 buckets 数组 下标
+    // 接着 处理 hash 冲突 就 行了
     for (p = buckets[h]; p; p = p->link)
     {
         // 如果 new 的 string  已存在 则 返回
@@ -108,19 +109,19 @@ const char *Atom_new(const char *str, int len)
         }
     }
     // alloc 是 Mem 的基本分配函数，模拟标准库中的malloc, 请求参数是字节数
-    // 分配 atom 和 附加 空间 来 存储 序列  
+    // 分配 atom 和 附加 空间 来 存储 序列
     p = malloc(sizeof(*p) + len + 1);
     p->len = len;
-    // 将 p+1 强转成 指向 char 的 指针   
+    // 将 p+1 强转成 指向 char 的 指针
     p->str = (char *)(p + 1);
     if (len > 0)
     {
-        // 将 str 复制 到 p->str 
+        // 将 str 复制 到 p->str
         memcpy(p->str, str, len);
     }
-    // 设置 终止 标志 
+    // 设置 终止 标志
     p->str[len] = '\0';
-    // 添加 新 的 入口 到 buckets[h] 中 链表 的表头 
+    // 添加 新 的 入口 到 buckets[h] 中 链表 的表头
     p->link = buckets[h];
     buckets[h] = p;
     return p->str;
@@ -132,8 +133,8 @@ int Atom_length(const char *str)
     int i;
 
     assert(str);
-    // 由于 不知道 参数 长度 ，所以 不能 对 参数 进行 散列 操作 ， 
-    // 所以 只能 双重循环 查找 str 
+    // 由于 不知道 参数 长度 ，所以 不能 对 参数 进行 散列 操作 ，
+    // 所以 只能 双重循环 查找 str
     for (i = 0; i < NELEMS(buckets); i++)
     {
         for (p = buckets[i]; p; p = p->link)
@@ -147,6 +148,9 @@ int Atom_length(const char *str)
     assert(0);
     return 0;
 }
-int main(){
+int main()
+{
+    const char *result = Atom_new("hello", 5);
+    printf("result's %s", result);
     return 0;
 }
